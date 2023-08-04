@@ -1,0 +1,23 @@
+<?php require('template/header.phtml') ?>
+<br>
+<div class="sing-up">
+    <form action="registerUser.php" method="post" class="form text-primary">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="file" id="sign-up-avatar" name="img" accept="image/*">
+        <input type="submit" name="registerbutton" value="Register" id="sign-up-btn">
+        <button id="upload-file">Upload Picture</button>
+    </form>
+</div>
+<script>
+    document.getElementById("upload-file").onclick = displayDate;
+
+    function displayDate() {
+        document.getElementById("sign-up-avatar").click();
+    }
+</script>
+
+
+
+<?php require('template/footer.phtml') ?>

@@ -1,0 +1,53 @@
+<?php require('Views/template/header.phtml') ?>
+<br>
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr><th>User ID</th><th>Username</th><th>Email</th><th>Photo</th><th>Location</th><th>status</th></tr>
+        </thead>
+        <tbody>
+        <?php foreach ($userDataSet as $friend){// for all of the friends show this information
+            echo'<tr> <td>' . $friend->getUserID() .
+                '</td> <td>' . $friend->getUsername() .
+                '</td> <td>' . $friend->getEmail() .
+                '</td> <td>' . '<img src="users/' . $friend->getPhotoName() . ' " alt="no picture" />' .
+                '</td>';
+            $status = $friend->getStatus();
+            switch($status){ //check friend status
+                case 1://if status is 1 the friend request is sent by current user
+                    if($friend->getFriend1() !==$friend->getUserID()){ //if friend sending the request is not current user then show this
+                        echo'
+                    <td><p1>Location unavaliable</p1></td>
+                    <td><p1>Friend request sent</p1><br> 
+                            <form method="post" action="requests.php?id='.$friend->getFriendshipID().'" class="form text-primary">                     
+                                <input type="submit" value="Cancel" class ="friendBtn" name="Cancel">
+                           </form></td> ';
+                    }else{
+                        echo//if current user isnt sending request then show these option
+                            '
+                            <td><p1>(</p1>' . $friend->getLat(),'<p1>, </p1>'.$friend->getLng() .'<p1>)</p1></td>
+                            <td><p1>Incoming request</p1><br> 
+                            <form method="post" action="requests.php?id='.$friend->getFriendshipID().'" class="form text-primary">                     
+                                <input type="submit" value="Accept" class ="friendBtn"  name="Accept" id="acceptbtn"/>
+                                <input type="submit" value="Deny" class ="friendBtn" name="Deny"> 
+                           </form></td> ';
+                    }
+                    break;
+                case 3:// if incoming request then show accept or deny
+                    echo '
+                    <td><p1>(</p1>' . $friend->getLat(),'<p1>, </p1>'.$friend->getLng() .'<p1>)</p1></td>
+                    <td><p1>Incoming request</p1><br>
+                          <form method="post" action="requests.php?id='.$friend->getFriendshipID().'" class="form text-primary">                     
+                            <input type="submit" value="Accept" class ="friendBtn"  name="Accept" id="acceptbtn"/>
+                            <input type="submit" value="Deny" class ="friendBtn" name="Deny"> 
+                           </form>                            
+                    </td>';
+                    break;
+            }
+            '</tr>';
+        }
+        ?>
+        </tbody>
+    </table>
+
+<?php require('Views/template/footer.phtml') ?>

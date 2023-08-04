@@ -1,0 +1,279 @@
+body{
+    margin: 0;
+    font-family: "Lato", sans-serif;
+    background-color: #ffffff;
+}
+
+.head-header{
+    background-color: #428bca;
+    box-shadow: 0 0 5px -1px #000000;
+    max-height: 150px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 140px;
+}
+.header{
+    height: 60px;
+    max-width: 730px;
+    display: flex;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.banner{
+    height: 50px;
+    width: 150px;
+    margin-right: 10px;
+}
+
+.navbar{
+    height: 50px;
+    max-width: 330px;
+    margin-top: 10px;
+}
+
+ul{
+    display: flex;
+}
+
+li{
+    list-style: none;
+    padding: 0px 5px;
+}
+li a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+li a:hover{
+    text-decoration: underline rgb(0, 3, 209);
+}
+.icon{
+    display: none;
+    text-decoration: none;
+}
+.user{
+    height: 50px;
+    width: 180px;
+}
+
+.user-img{
+    float: right;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: black;
+}
+#logout-btn{
+    float: right;
+    cursor: pointer;
+}
+.user-name{
+    height: 20px;
+    width: 122px;
+    float: left;
+    margin-top: 15px;
+    text-align: right;
+    color: white;
+}
+
+#myForm a{
+    text-decoration: none;
+    color: black;
+}
+#myForm input[type=text], input[type=password]{
+    padding: 5px;
+    border: none;
+    margin-top: 3px;
+    font-size: 15px;
+}
+
+#myForm button{
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+#myForm button:focus{
+    border: none;
+}
+#removebtn{
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+}
+#acceptbtn{
+    background-color: green;
+    color: white;
+    border: 1px solid black;
+}
+.search-bar{
+    height: 50px;
+    width: 345px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar input[type=text] {
+    float: left;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-left: 16px;
+    font-size: 17px;
+    box-shadow: 0 0 5px -1px #00ffe6;
+}
+.search-bar input[type=text]:focus{
+    outline: none;
+}
+
+.searchButton{
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-left: 16px;
+    font-size: 17px;
+    box-shadow: 0 0 5px -1px #000000;
+}
+.mobile-search{
+    display: none;
+}
+.search-result{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #428bca;
+    max-width: 700px;
+    margin-top: 28px;
+    box-shadow: 3px 3px 3px grey;
+}
+#txtHint{
+    display: block;
+}
+#txtHint li a p1{
+    padding: 15px;
+}
+
+.content{
+    margin-top: 135px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contents{
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table img{
+    height: 45px;
+}
+.sing-up{
+    margin-top:50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+.sing-up input{
+    height: 35px;
+    width: 300px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#sign-up-btn{
+    width: 140px;
+    float: left;
+}
+#sign-up-avatar{
+    display: none;
+}
+#upload-file{
+    width: 140px;
+    height: 35px;
+    float: right;
+}
+#friend_map{
+    height: 300px;
+    width: 100%;
+    position: relative;
+    bottom: 30px;
+}
+.footer{
+    color: white;
+    background-color: #428bca;
+    box-shadow: 0 0 5px -1px #000000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    text-align: center;
+}
+@media screen and (max-width: 675px) {
+    .navbar, .search-bar, .banner {
+        display: none;
+        flex-direction: column;
+    }
+    .mobile-search{
+        display: block;
+    }
+    .sing-up{
+        margin-top: 150px;
+    }
+    .head-header{
+        height: 100px;
+    }
+    
+    .icon{
+        display: block;
+        color: rgb(0, 0, 0);        
+        font-size: 40px;
+    }
+
+    .navbar.show{
+        display: flex;   
+        position: absolute;
+        margin-top: 70px;     
+        margin-right: 10px;
+    }
+    .navbar ul{
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 675px;
+        background-color: rgb(234, 234, 234);
+        margin-left: -12px;
+    }
+
+    .navbar li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+    .navbar li:hover{
+        background-color: #00f74a;
+    }
+
+    #myForm input[type=text], input[type=password]{
+        border: none;
+        margin-top: 3px;
+        font-size: 10px;
+    }
+
+    .contents, .content{
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .table{
+        margin-top: 100px;
+        font-size: 11px;
+    }
+
+}

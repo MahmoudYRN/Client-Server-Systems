@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mahmoud AGE439">
+	
+	<link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <title>Server-Side Programming - <?php echo $view->pageTitle; ?></title>
+
+</head>
+<body role="document">
+<?php
+    $token = substr(str_shuffle(MD5(microtime())),0,20);
+    //generating a random unique token for security
+    $_SESSION["Token"] = $token;
+    //var_dump($token);
+?>
+
+<div class="head-header">
+    <div class="header">
+        <img src="/images/banner.png" class="banner">
+        <a href="javascript:void(0);"  class="icon" id="dropdown-menu">&#9776;</a>
+        <div class="navbar  " id="myNavbar">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+
+                <?php
+                if($user->isLoggedIn()){
+                    echo '<li><a href="requests.php">Requests</a></li>
+                        <li><a href="friends.php">Friends</a></li>';
+                }?>
+            </ul>
+        </div>
+        <div class="user">
+            <?php
+                if($user->isLoggedIn()){
+                    foreach ($userPhotos as $userData){
+                    }
+                    echo '
+                        <div class="user-name">
+                        <p1>'.ucfirst($_SESSION["login"]).'</p1>
+                        </div>
+                        <img class="user-img" src="users/' . $userData->getPhotoName() . ' " alt="no picture" />
+                        <form method="post" action="" class="form text-primary">
+                        <button id="logout-btn" type="submit" name="logout-btn">Logout</button>
+                        </form>
+                    ';
+                }
+                else{
+                    echo '
+            <div class="form-popup" id="myForm">
+                <form method="post" action="" class="form text-primary">
+                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="password" placeholder="Password" name="password" required>
+                    <button type="submit"  name="login-btn">Signin</button>
+                    <button><a href="registerUser.php">Signup</a></button>
+                </form>
+            </div>
+                    ';
+                }
+            ?>
+        </div>
+    </div>
+<?php
+if($user->isLoggedIn()){
+    echo '<div class="search-bar">
+        <form  autocomplete="off" class="searcher"  method="post" action="">
+            <input type="text" placeholder="Search.." id="searchbox" name="search-text" onkeyup="searchHint(this.value)">
+            <button class="searchButton" id="searchButton" name="searchButton">Search</button>
+        </form>
+    </div>';
+}
+?>
+<script>
+    function searchHint(str) {
+        // console.log(str);
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "";
+            return;//if no input change the value to nothing
+        } else {
+            xml = new XMLHttpRequest();//make new ajax request
+            xml.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    uic = document.getElementById("txtHint")
+                    //uic.innerHTML = this.responseText;
+                    //console.log(this.responseText);
+                    if(this.response != "no suggestions"){
+                        uic.innerHTML = "";
+                        people = JSON.parse(this.responseText);
+                        //parse data returned from this function into javascript objects
+                        people.forEach(function (obj){
+                            uic.innerHTML += "<li><img src='users/"+ obj.photo +"' height='45px'><a href='index.php?id="+ obj.id +"' ><p1>"+ obj.username + "</p1><p1>"+obj.email+"</p1><p1>"+ obj.lat + ","+ obj.lng + "</p1> </a></li><br>";
+                        });//foreach object wrap data into a list link
+                    }
+                    else{
+                        uic.innerHTML = "<p1>no suggestions</p1>";
+                    }
+                }
+            };
+            xml.open("GET", "getProfile.php?q=" + str +"&token=<?php echo $token ?>", true);
+            xml.send();//sends request to this php class
+        }
+    }
+</script>
+    <div class="mobile-search">
+        <form autocomplete="off" class="searcher" method="post" action="">
+            <input type="text" placeholder="Search.." id="searchbox" name="search-text" onkeyup="searchHint(this.value)">
+            <button id="searchButton" name="searchButton">Search</button>
+        </form>
+    </div>
+    <div class="search-result" id="search-result">
+        <ul id="txtHint">
+
+        </ul>
+    </div>
+
+</div>
+<div class="content">
+    <div class="contents">

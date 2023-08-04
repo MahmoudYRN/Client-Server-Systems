@@ -1,0 +1,44 @@
+<?php require('Views/template/header.phtml') ?>
+
+
+<br>
+    <table class="table table-hover">
+        <thead>
+        <?php
+        if ($user->isLoggedIn()){ //if the user is logged in show this
+            echo '<tr><th>User ID</th><th>Username</th><th>Email</th><th>Photo</th></tr>';
+        }
+        else{//if user is not logged in show this instead
+            echo '<tr><th>Username</th><th>Photo</th></tr>';
+        }
+        ?>
+
+        </thead>
+        <tbody>
+        <?php foreach ($userDataSet as $userData) {
+            if ($user->isLoggedIn()) {//if the user is currently logged in
+                echo '<tr> <td>' . $userData->getuserID() .
+                    '</td> <td>' . $userData->getUserName() .
+                    '</td> <td>' . $userData->getEmail() .
+                    '</td> <td>' . '<img src="users/' . $userData->getPhotoName() . ' " alt="no picture" />' .
+                    '<td>
+                        <form method="post" action="requests.php?id='.$userData->getuserID().'" class="form text-primary">   
+                          <input type="submit" value="Add friend" class ="friendBtn" name="addFriend" />                       
+                        </form>   
+                    </td>'.
+                    '</td> </tr>';
+            }
+            else
+            {
+                echo
+                    '</td> <td>' . $userData->getUserName() .
+                    '</td> <td>' . '<img src="users/' . $userData->getPhotoName() . ' " alt="no picture"/>' .
+                    '</td> </tr>';
+            }
+        }?>
+
+        </tbody>
+    </table>
+<br>
+
+<?php require('Views/template/footer.phtml') ?>
